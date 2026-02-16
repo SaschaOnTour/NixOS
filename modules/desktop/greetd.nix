@@ -27,6 +27,7 @@ in
       background = {
         path = wallpaperPath;
         fit = "Cover";
+        color = style.colors.background;  # Fallback color when path is null
       };
       GTK = {
         application_prefer_dark_theme = true;

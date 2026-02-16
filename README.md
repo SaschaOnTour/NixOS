@@ -70,7 +70,19 @@ Everything is toggled in a single `config.nix`:
 - NixOS Live USB (23.11+)
 - ≥ 50 GB disk space
 
-### Install
+### Install (Interactive)
+
+Boot the NixOS Live USB, connect to the internet, then run:
+
+```bash
+nix-shell -p git curl
+sudo bash <(curl -sL https://raw.githubusercontent.com/SaschaOnTour/NixOS/main/install.sh)
+```
+
+The installer guides you through everything — disk selection, configuration, encryption, and installation. No second screen needed.
+
+<details>
+<summary><strong>Manual installation</strong></summary>
 
 ```bash
 # 1. Enable flakes
@@ -83,7 +95,7 @@ nano config.nix
 
 # 3. Partition & encrypt disk (⚠️ WIPES TARGET DISK)
 sudo nix --experimental-features "nix-command flakes" run \
-  github:nix-community/disko -- --mode disko ./hosts/default/disko-config.nix
+  github:nix-community/disko -- --mode disko --flake .#hostname
 
 # 4. Install NixOS
 sudo nixos-install --flake .#hostname --no-root-passwd
@@ -92,6 +104,8 @@ sudo nixos-install --flake .#hostname --no-root-passwd
 reboot
 passwd yourname
 ```
+
+</details>
 
 > 📖 **New to NixOS?** There's a detailed [Beginner's Guide](#-beginners-guide) below covering every step from flashing the USB to your first desktop session.
 
@@ -187,27 +201,18 @@ Boot from USB via UEFI menu (F2/F12/Del). For WiFi, run `nmtui`.
 
 Verify: `curl -sI https://nixos.org` — if you see HTTP headers, you're connected.
 
-#### 4. Get the Config
+#### 4. Run the Installer
 
 ```bash
-nix-shell -p git
-git clone https://github.com/SaschaOnTour/NixOS.git /tmp/nixos-config
-cd /tmp/nixos-config
-nano config.nix
+nix-shell -p git curl
+sudo bash <(curl -sL https://raw.githubusercontent.com/SaschaOnTour/NixOS/main/install.sh)
 ```
 
-#### 5. Partition & Install
+The interactive installer walks you through disk selection, username, hostname, swap size, git config, and feature flags. It then partitions the disk, sets up encryption, and installs NixOS — all in one guided flow.
+
+After installation, it prompts you to reboot. Then set your password:
 
 ```bash
-# Partition (⚠️ WIPES DISK)
-sudo nix --experimental-features "nix-command flakes" run \
-  github:nix-community/disko -- --mode disko ./hosts/default/disko-config.nix
-
-# Install
-sudo nixos-install --flake .#hostname --no-root-passwd
-
-# Reboot & set password
-reboot
 passwd yourname
 ```
 

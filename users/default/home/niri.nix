@@ -9,11 +9,15 @@
       # Keyboard layout
       input.keyboard.xkb.layout = userConfig.keyboardLayout;
 
+      # Default background color (shown when no wallpaper is set)
+      outputs."*".background-color = style.colors.background;
+
       # Autostart applications (use argv, not command)
       spawn-at-startup = [
         { argv = [ "waybar" ]; }
         { argv = [ "mako" ]; }
         { argv = [ "swww-daemon" ]; }
+        { argv = [ "sh" "-c" "sleep 1 && [ -f \"$HOME/${userConfig.wallpaper}\" ] && swww img \"$HOME/${userConfig.wallpaper}\"" ]; }
         { argv = [ "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1" ]; }
         { argv = [ "nm-applet" "--indicator" ]; }
       ];
