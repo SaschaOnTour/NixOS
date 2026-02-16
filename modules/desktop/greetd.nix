@@ -1,5 +1,5 @@
 # Greetd configuration: Login manager with ReGreet
-{ pkgs, userConfig, style, ... }:
+{ pkgs, lib, userConfig, style, ... }:
 
 let
   # Build wallpaper path if configured, otherwise use null
@@ -31,9 +31,9 @@ in
       };
       GTK = {
         application_prefer_dark_theme = true;
-        theme_name = style.gtkTheme;
-        icon_theme_name = style.iconTheme;
-        font_name = "${style.fonts.default} ${toString style.fonts.size}";
+        theme_name = lib.mkForce style.gtkTheme;
+        icon_theme_name = lib.mkForce style.iconTheme;
+        font_name = lib.mkForce "${style.fonts.default} ${toString style.fonts.size}";
       };
     };
   };
