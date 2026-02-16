@@ -1,6 +1,6 @@
 # Style configuration - Theming and visual settings
-# Diese Datei enthält NUR visuelle Einstellungen (Farben, Fonts, etc.)
-# Nutzer-spezifische Werte befinden sich in config.nix
+# This file contains ONLY visual settings (colors, fonts, etc.)
+# User-specific values are in config.nix
 {
   # Color scheme (Dracula-inspired)
   colors = {

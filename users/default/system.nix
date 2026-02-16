@@ -11,8 +11,8 @@
     description = userConfig.username;
     extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
     shell = pkgs.fish;
-    # SICHERHEIT: Kein initialPassword!
-    # Nach der Installation Passwort setzen mit: passwd <username>
+    # SECURITY: No initialPassword!
+    # Set password after installation with: passwd <username>
   };
 
   # Home Manager configuration

@@ -1,5 +1,5 @@
 # VMware Guest Additions
-# Nur aktivieren wenn NixOS in einer VMware VM läuft
+# Only enable if NixOS runs inside a VMware VM
 { ... }:
 
 {

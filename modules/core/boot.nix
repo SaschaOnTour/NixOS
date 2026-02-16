@@ -17,7 +17,7 @@
   # Deletes and recreates the root Btrfs subvolume on every boot
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     mkdir -p /btrfs_tmp
-    mount /dev/pool/root /btrfs_tmp || { echo "FEHLER: Mount fehlgeschlagen"; exit 1; }
+    mount /dev/pool/root /btrfs_tmp || { echo "ERROR: Mount failed"; exit 1; }
 
     if [[ -e /btrfs_tmp/root ]]; then
         mkdir -p /btrfs_tmp/old_roots
@@ -39,8 +39,8 @@
     done
 
     # Create fresh root subvolume
-    btrfs subvolume create /btrfs_tmp/root || { umount /btrfs_tmp; echo "FEHLER: Subvolume-Erstellung fehlgeschlagen"; exit 1; }
-    umount /btrfs_tmp || echo "WARNUNG: Unmount fehlgeschlagen"
+    btrfs subvolume create /btrfs_tmp/root || { umount /btrfs_tmp; echo "ERROR: Subvolume creation failed"; exit 1; }
+    umount /btrfs_tmp || echo "WARNING: Unmount failed"
   '';
 
   # Enable btrfs support in initrd

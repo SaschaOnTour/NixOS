@@ -1,30 +1,30 @@
-# config.nix - NUTZERKONFIGURATION
+# config.nix - USER CONFIGURATION
 # =================================
-# Diese Datei VOR der Installation anpassen!
+# Edit this file BEFORE installation!
 
 {
-  # === PFLICHTFELDER ===
+  # === REQUIRED FIELDS ===
 
-  # System-Benutzername (nur Kleinbuchstaben, keine Leerzeichen)
-  username = "deinname";
+  # System username (lowercase only, no spaces)
+  username = "yourname";
 
-  # Rechnername (wird in der Shell und im Netzwerk angezeigt)
+  # Hostname (shown in shell prompt and network)
   hostname = "nixos";
 
-  # Ziel-Festplatte für die Installation
-  # WICHTIG: Mit 'lsblk' den korrekten Pfad ermitteln!
-  # Beispiele: "/dev/nvme0n1", "/dev/sda", "/dev/vda"
+  # Target disk for installation
+  # IMPORTANT: Use 'lsblk' to find the correct path!
+  # Examples: "/dev/nvme0n1", "/dev/sda", "/dev/vda"
   disk = "/dev/nvme0n1";
 
-  # Swap-Größe für Hibernation (Suspend-to-Disk)
-  # Muss >= RAM-Größe sein, z.B. "16G", "32G", "64G"
+  # Swap size for hibernation (suspend-to-disk)
+  # Must be >= RAM size, e.g. "16G", "32G", "64G"
   swapSize = "36G";
 
   # === GIT ===
 
   git = {
-    userName = "Dein Name";
-    userEmail = "dein@email.de";
+    userName = "Your Name";
+    userEmail = "your@email.com";
   };
 
   # === REGION ===
@@ -33,23 +33,23 @@
   locale = "de_DE.UTF-8";
   keyboardLayout = "de";
 
-  # === FEATURE-FLAGS ===
+  # === FEATURE FLAGS ===
 
   features = {
-    # Entwicklungstools aktivieren?
-    # Enthält: JetBrains IDEs, Docker, Rust, .NET, Java, Node.js, Zed Editor
+    # Enable development tools?
+    # Includes: JetBrains IDEs, Docker, Rust, .NET, Java, Node.js, Zed Editor
     development = true;
 
-    # Desktop-Umgebung aktivieren?
-    # Enthält: Niri (Wayland Compositor), Waybar, Fuzzel, Mako
-    # Auf 'false' setzen für Server/Headless-Systeme
+    # Enable desktop environment?
+    # Includes: Niri (Wayland Compositor), Waybar, Fuzzel, Mako
+    # Set to 'false' for server/headless systems
     desktop = true;
 
-    # VMware Guest Additions aktivieren?
-    # Nur auf 'true' setzen wenn NixOS in einer VMware VM läuft
+    # Enable VMware Guest Additions?
+    # Only set to 'true' if NixOS runs inside a VMware VM
     vmwareGuest = false;
 
-    # AI Coding-Assistenten
+    # AI coding assistants
     ai = {
       claudeCode = true;     # Anthropic Claude Code CLI
       chatgptCodex = true;   # OpenAI Codex CLI
@@ -59,7 +59,7 @@
 
   # === OPTIONAL ===
 
-  # Hintergrundbild für Login-Bildschirm (relativ zum Home-Verzeichnis)
-  # null = Standard-Hintergrund verwenden
+  # Wallpaper for login screen (relative to home directory)
+  # null = use default wallpaper
   wallpaper = "Pictures/wallpaper.jpg";
 }
