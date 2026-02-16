@@ -298,26 +298,44 @@ collect_config() {
 
     step "Feature Flags"
 
-    ask_yes_no "Enable development tools? (JetBrains, Docker, Rust, .NET)" "y" \
-        && CONFIG_FEAT_DEV=true || CONFIG_FEAT_DEV=false
+    if ask_yes_no "Enable development tools? (JetBrains, Docker, Rust, .NET)" "y"; then
+        CONFIG_FEAT_DEV=true
+    else
+        CONFIG_FEAT_DEV=false
+    fi
 
-    ask_yes_no "Enable desktop environment? (Niri, Waybar, VLC, OBS)" "y" \
-        && CONFIG_FEAT_DESKTOP=true || CONFIG_FEAT_DESKTOP=false
+    if ask_yes_no "Enable desktop environment? (Niri, Waybar, VLC, OBS)" "y"; then
+        CONFIG_FEAT_DESKTOP=true
+    else
+        CONFIG_FEAT_DESKTOP=false
+    fi
 
-    ask_yes_no "Enable VMware guest additions?" "n" \
-        && CONFIG_FEAT_VMWARE=true || CONFIG_FEAT_VMWARE=false
+    if ask_yes_no "Enable VMware guest additions?" "n"; then
+        CONFIG_FEAT_VMWARE=true
+    else
+        CONFIG_FEAT_VMWARE=false
+    fi
 
     echo ""
     info "AI tools:"
 
-    ask_yes_no "  Enable Claude Code CLI?" "y" \
-        && CONFIG_FEAT_CLAUDE=true || CONFIG_FEAT_CLAUDE=false
+    if ask_yes_no "  Enable Claude Code CLI?" "y"; then
+        CONFIG_FEAT_CLAUDE=true
+    else
+        CONFIG_FEAT_CLAUDE=false
+    fi
 
-    ask_yes_no "  Enable ChatGPT Codex CLI?" "y" \
-        && CONFIG_FEAT_CODEX=true || CONFIG_FEAT_CODEX=false
+    if ask_yes_no "  Enable ChatGPT Codex CLI?" "y"; then
+        CONFIG_FEAT_CODEX=true
+    else
+        CONFIG_FEAT_CODEX=false
+    fi
 
-    ask_yes_no "  Enable OpenCode CLI?" "y" \
-        && CONFIG_FEAT_OPENCODE=true || CONFIG_FEAT_OPENCODE=false
+    if ask_yes_no "  Enable OpenCode CLI?" "y"; then
+        CONFIG_FEAT_OPENCODE=true
+    else
+        CONFIG_FEAT_OPENCODE=false
+    fi
 }
 
 # ============================================================================
