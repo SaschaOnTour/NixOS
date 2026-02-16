@@ -27,7 +27,7 @@
   environment.systemPackages = with pkgs; [
     # === IDEs ===
     jetbrains.rider
-    jetbrains.idea-ultimate
+    jetbrains.idea
     jetbrains.rust-rover
     zed-editor
 
