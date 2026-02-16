@@ -61,9 +61,9 @@ ask_yes_no() {
     local result
 
     if [[ "$default" == "y" ]]; then
-        echo -ne "${BOLD}$prompt${NC} ${DIM}[Y/n]${NC}: "
+        echo -ne "${BOLD}$prompt${NC} ${DIM}[Y/n, Enter = yes]${NC}: "
     else
-        echo -ne "${BOLD}$prompt${NC} ${DIM}[y/N]${NC}: "
+        echo -ne "${BOLD}$prompt${NC} ${DIM}[y/N, Enter = no]${NC}: "
     fi
 
     read -r result

@@ -16,7 +16,7 @@
     yazi
     ffmpegthumbnailer
     tumbler
-    poppler_utils
+    poppler-utils
 
     # === Media ===
     imv          # Image viewer
