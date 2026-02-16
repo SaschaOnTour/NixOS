@@ -11,8 +11,8 @@
     description = userConfig.username;
     extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
     shell = pkgs.fish;
-    # SECURITY: No initialPassword!
-    # Set password after installation with: passwd <username>
+    # Initial password for first login — change immediately with: passwd
+    initialPassword = "nixos";
   };
 
   # Home Manager configuration
