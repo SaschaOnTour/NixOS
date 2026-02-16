@@ -43,12 +43,14 @@ ask() {
     local result
 
     if [[ -n "$default" ]]; then
-        echo -ne "${BOLD}$prompt${NC} ${DIM}[$default]${NC}: "
+        echo -ne "${BOLD}$prompt${NC} ${DIM}[$default]${NC}: " >&2
         read -r result
+        result="${result%$'\r'}"
         echo "${result:-$default}"
     else
-        echo -ne "${BOLD}$prompt${NC}: "
+        echo -ne "${BOLD}$prompt${NC}: " >&2
         read -r result
+        result="${result%$'\r'}"
         echo "$result"
     fi
 }
@@ -65,6 +67,7 @@ ask_yes_no() {
     fi
 
     read -r result
+    result="${result%$'\r'}"
     result="${result:-$default}"
     [[ "${result,,}" == "y" || "${result,,}" == "yes" ]]
 }

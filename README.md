@@ -76,7 +76,8 @@ Boot the NixOS Live USB, connect to the internet, then run:
 
 ```bash
 nix-shell -p git curl
-sudo bash <(curl -sL https://raw.githubusercontent.com/SaschaOnTour/NixOS/main/install.sh)
+curl -sL https://raw.githubusercontent.com/SaschaOnTour/NixOS/main/install.sh -o /tmp/install.sh
+sudo bash /tmp/install.sh
 ```
 
 The installer guides you through everything — disk selection, configuration, encryption, and installation. No second screen needed.
@@ -205,7 +206,8 @@ Verify: `curl -sI https://nixos.org` — if you see HTTP headers, you're connect
 
 ```bash
 nix-shell -p git curl
-sudo bash <(curl -sL https://raw.githubusercontent.com/SaschaOnTour/NixOS/main/install.sh)
+curl -sL https://raw.githubusercontent.com/SaschaOnTour/NixOS/main/install.sh -o /tmp/install.sh
+sudo bash /tmp/install.sh
 ```
 
 The interactive installer walks you through disk selection, username, hostname, swap size, git config, and feature flags. It then partitions the disk, sets up encryption, and installs NixOS — all in one guided flow.
