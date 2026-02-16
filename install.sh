@@ -437,17 +437,30 @@ EOF
 clone_repo() {
     step "Cloning Repository"
 
-    if [[ -d "$WORK_DIR" ]]; then
-        warn "Removing existing $WORK_DIR"
-        rm -rf "$WORK_DIR"
+    if [[ -d "$WORK_DIR/.git" ]]; then
+        info "Repository already exists at $WORK_DIR, updating..."
+        git -C "$WORK_DIR" pull --ff-only || {
+            warn "Pull failed, re-cloning..."
+            rm -rf "$WORK_DIR"
+            git clone "$REPO_URL" "$WORK_DIR"
+        }
+    else
+        [[ -d "$WORK_DIR" ]] && rm -rf "$WORK_DIR"
+        git clone "$REPO_URL" "$WORK_DIR"
     fi
 
-    git clone "$REPO_URL" "$WORK_DIR"
-    success "Repository cloned to $WORK_DIR"
+    success "Repository ready at $WORK_DIR"
 }
 
 run_disko() {
     step "Partitioning & Encrypting Disk"
+
+    # Skip if already partitioned (LUKS container exists)
+    if lsblk -n -o TYPE "$SELECTED_DISK" 2>/dev/null | grep -q "crypt"; then
+        info "Disk already partitioned and encrypted — skipping Disko."
+        success "Using existing partitions"
+        return
+    fi
 
     info "Disko will now partition $SELECTED_DISK."
     info "You will be asked to set a ${BOLD}LUKS encryption password${NC}."
@@ -463,12 +476,31 @@ run_disko() {
 run_install() {
     step "Installing NixOS"
 
-    info "This will take a while on the first run..."
-    echo ""
+    local max_retries=3
+    local attempt=1
 
-    nixos-install --flake "$WORK_DIR#$CONFIG_HOSTNAME" --no-root-passwd
+    while (( attempt <= max_retries )); do
+        info "Attempt $attempt/$max_retries — this may take a while..."
+        echo ""
 
-    success "NixOS installed successfully!"
+        if nixos-install --flake "$WORK_DIR#$CONFIG_HOSTNAME" --no-root-passwd; then
+            success "NixOS installed successfully!"
+            return
+        fi
+
+        if (( attempt < max_retries )); then
+            warn "Installation failed (likely a network error)."
+            info "Retrying in 5 seconds... (attempt $((attempt+1))/$max_retries)"
+            sleep 5
+        fi
+
+        ((attempt++))
+    done
+
+    error "Installation failed after $max_retries attempts."
+    echo -e "  You can retry manually with:"
+    echo -e "  ${CYAN}nixos-install --flake $WORK_DIR#$CONFIG_HOSTNAME --no-root-passwd${NC}"
+    exit 1
 }
 
 # ============================================================================
@@ -513,6 +545,25 @@ main() {
     check_internet
     check_nix
     check_git
+
+    # Detect previous run — offer to resume
+    if [[ -f "$WORK_DIR/config.nix" ]]; then
+        warn "Previous installation detected at $WORK_DIR"
+        if ask_yes_no "Resume previous installation?" "y"; then
+            info "Resuming — loading config from previous run..."
+            # Read hostname from existing config.nix for the flake reference
+            CONFIG_HOSTNAME=$(grep 'hostname' "$WORK_DIR/config.nix" | head -1 | sed 's/.*"\(.*\)".*/\1/')
+            SELECTED_DISK=$(grep 'disk' "$WORK_DIR/config.nix" | head -1 | sed 's/.*"\(.*\)".*/\1/')
+            CONFIG_USERNAME=$(grep 'username' "$WORK_DIR/config.nix" | head -1 | sed 's/.*"\(.*\)".*/\1/')
+            success "Loaded: hostname=$CONFIG_HOSTNAME, disk=$SELECTED_DISK, user=$CONFIG_USERNAME"
+            run_disko
+            run_install
+            finish
+            return
+        else
+            info "Starting fresh installation..."
+        fi
+    fi
 
     select_disk
     collect_config
