@@ -11,7 +11,8 @@
     description = userConfig.username;
     extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
     shell = pkgs.fish;
-    # Initial password for first login — change immediately with: passwd
+    # Initial password for first boot — change with: passwd
+    # /etc/shadow is persisted, so passwd changes survive reboots
     initialPassword = "nixos";
   };
 

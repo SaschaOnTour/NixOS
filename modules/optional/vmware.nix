@@ -4,4 +4,7 @@
 
 {
   virtualisation.vmware.guest.enable = true;
+
+  # Use software renderer — vmwgfx/SVGA3D hangs with Wayland compositors
+  environment.variables.WLR_RENDERER = "pixman";
 }
