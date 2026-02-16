@@ -1,0 +1,3 @@
+# Force LF line endings for all text files
+# CRLF breaks Nix scripts (writeShellScriptBin embeds \r into generated scripts)
+* text=auto eol=lf
