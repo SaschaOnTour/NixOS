@@ -285,7 +285,7 @@ collect_config() {
         warn "Invalid format. Use a number followed by G or M (e.g., 16G, 8G)."
     done
 
-    step "Git Configuration"
+    step "Git Configuration (optional, press Enter to skip)"
 
     CONFIG_GIT_NAME=$(ask "Git user name" "")
     CONFIG_GIT_EMAIL=$(ask "Git email" "")
@@ -334,8 +334,8 @@ show_summary() {
     echo -e "  Swap size:    ${CYAN}$CONFIG_SWAP${NC}"
     echo ""
     echo -e "  ${BOLD}Git${NC}"
-    echo -e "  Name:         ${CYAN}$CONFIG_GIT_NAME${NC}"
-    echo -e "  Email:        ${CYAN}$CONFIG_GIT_EMAIL${NC}"
+    echo -e "  Name:         ${CYAN}${CONFIG_GIT_NAME:-(not set)}${NC}"
+    echo -e "  Email:        ${CYAN}${CONFIG_GIT_EMAIL:-(not set)}${NC}"
     echo ""
     echo -e "  ${BOLD}Region${NC}"
     echo -e "  Timezone:     ${CYAN}$CONFIG_TIMEZONE${NC}"
