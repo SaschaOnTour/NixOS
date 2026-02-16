@@ -9,18 +9,7 @@ let
     else null;
 in
 {
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        # ReGreet is a GTK4 greeter
-        command = "${pkgs.regreet}/bin/regreet";
-        user = "greeter";
-      };
-    };
-  };
-
-  # ReGreet configuration
+  # ReGreet configuration (automatically configures greetd + cage)
   programs.regreet = {
     enable = true;
     settings = {
