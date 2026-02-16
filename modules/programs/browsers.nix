@@ -13,13 +13,10 @@ in
     # Browsers
     vivaldi
     google-chrome
-    tor-browser-bundle-bin
+    tor-browser
 
     # Ephemeral browser script
     ephemeralBrowser
-
-    # Flatpak management
-    flatseal
   ];
 
   # Flatpak support
