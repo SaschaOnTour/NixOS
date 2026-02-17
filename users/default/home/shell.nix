@@ -17,8 +17,8 @@
       grep = "rg";
 
       # Nix helpers
-      os-switch = "nh os switch";
-      os-update = "nh os switch --update";
+      os-switch = "nh os switch ~/Projects/nixos-config";
+      os-update = "nh os switch --update ~/Projects/nixos-config";
 
       # Rust shortcuts
       ctest = "cargo nextest run";

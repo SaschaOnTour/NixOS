@@ -119,28 +119,24 @@ The installer uses `/tmp` which doesn't survive reboots. Clone your config to a 
 ```bash
 cd ~/Projects
 git clone https://github.com/SaschaOnTour/NixOS.git nixos-config
-cd nixos-config
 ```
+
+> **Important:** The shell aliases `os-switch` and `os-update` expect the config at `~/Projects/nixos-config`. Always clone to exactly this path.
 
 ### Applying config changes
 
 After editing your config or pulling updates:
 
 ```bash
-cd ~/Projects/nixos-config
-os-switch              # Apply changes (alias for: sudo nixos-rebuild switch --flake .#hostname)
+os-switch              # Apply changes (runs: nh os switch ~/Projects/nixos-config)
 ```
 
-No reboot needed — changes are applied immediately (except kernel updates).
+No reboot needed — changes are applied immediately (except kernel updates). You can run `os-switch` from any directory.
 
 ### Updating all packages
 
 ```bash
-os-update              # Update flake inputs + rebuild
-# or manually:
-cd ~/Projects/nixos-config
-nix flake update
-os-switch
+os-update              # Update flake inputs + rebuild (runs: nh os switch --update ~/Projects/nixos-config)
 ```
 
 ### Rollback
@@ -287,8 +283,8 @@ Unlike i3/Sway, Niri doesn't squeeze all windows onto one screen. Columns extend
 | `find` / `grep` | Fast search (fd / ripgrep) |
 | `g` / `dc` | Short for git / docker-compose |
 | `..` / `...` | Navigate up |
-| `os-switch` | Apply config changes |
-| `os-update` | Update + apply |
+| `os-switch` | Apply config changes (`nh os switch ~/Projects/nixos-config`) |
+| `os-update` | Update + apply (`nh os switch --update ~/Projects/nixos-config`) |
 | `z <path>` | Smart directory jump (zoxide) |
 
 </details>
