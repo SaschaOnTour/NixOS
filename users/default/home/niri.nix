@@ -70,8 +70,8 @@
 
       # Keybindings
       binds = {
-        # Hotkey overlay
-        "Mod+Shift+Slash".action.show-hotkey-overlay = {};
+        # Hotkey overlay (F1 = Help)
+        "Mod+F1".action.show-hotkey-overlay = {};
 
         # Applications
         "Mod+Return".action.spawn = style.terminal;

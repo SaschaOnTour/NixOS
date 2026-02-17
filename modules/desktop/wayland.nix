@@ -49,6 +49,9 @@
     vlc
     obs-studio
 
+    # Email
+    thunderbird
+
   ];
 
   # Wayland environment variables

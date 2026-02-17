@@ -50,6 +50,7 @@
         ".config/google-chrome"
 
         # Application configs
+        ".thunderbird"
         ".config/keepassxc"
         ".config/rclone"
         ".config/niri"
@@ -66,6 +67,11 @@
         ".config/claude-code"
         ".local/share/claude-code"
         ".npm"
+
+        # JetBrains IDEs (Rider, RustRover, IntelliJ)
+        ".config/JetBrains"
+        ".local/share/JetBrains"
+        ".java/.userPrefs"
 
         # Development caches
         ".cache/cargo-target"
