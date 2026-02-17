@@ -15,8 +15,8 @@
     # Window
     window-decoration = false
     confirm-close-surface = false
-    minimum-columns = 80
-    minimum-rows = 24
+    window-width = 80
+    window-height = 24
 
     # Shell
     shell-integration = fish
