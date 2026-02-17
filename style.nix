@@ -16,7 +16,7 @@
   # Font settings
   fonts = {
     default = "JetBrainsMono";
-    size = 13;
+    size = 11;
   };
 
   # Default applications
