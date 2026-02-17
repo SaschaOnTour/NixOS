@@ -49,6 +49,10 @@
     umount /btrfs_tmp || echo "WARNING: Unmount failed"
   '';
 
+  # Hardened kernel disables unprivileged user namespaces by default.
+  # Chromium-based browsers (Chrome, Vivaldi) need them for sandboxing.
+  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
+
   # Enable btrfs support in initrd
   boot.supportedFilesystems = [ "btrfs" ];
 }
