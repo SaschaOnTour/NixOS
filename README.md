@@ -112,16 +112,18 @@ passwd yourname
 
 ## 🔄 After Installation: Setup & Updates
 
-### First thing after install: Clone your config
+### Your config is already there
 
-The installer uses `/tmp` which doesn't survive reboots. Clone your config to a persistent location:
+The installer automatically clones the repo with your personal `config.nix` to `~/Projects/nixos-config`. No manual setup needed.
 
-```bash
-cd ~/Projects
-git clone https://github.com/SaschaOnTour/NixOS.git nixos-config
-```
+> **Note:** If the directory is missing for any reason, clone manually:
+> ```bash
+> cd ~/Projects
+> git clone https://github.com/SaschaOnTour/NixOS.git nixos-config
+> ```
+> Then edit `config.nix` with your values (username, hostname, etc.).
 
-> **Important:** The shell aliases `os-switch` and `os-update` expect the config at `~/Projects/nixos-config`. Always clone to exactly this path.
+> **Important:** The shell aliases `os-switch` and `os-update` expect the config at `~/Projects/nixos-config`.
 
 ### Applying config changes
 
@@ -235,11 +237,13 @@ sudo bash /tmp/install.sh
 
 The interactive installer walks you through disk selection, username, hostname, swap size, git config, and feature flags. It then partitions the disk, sets up encryption, and installs NixOS — all in one guided flow.
 
-After installation, it prompts you to reboot. Then set your password:
+After installation, it prompts you to reboot. Log in with your username and initial password `nixos`, then change it:
 
 ```bash
-passwd yourname
+change-password
 ```
+
+> **Important:** Use `change-password` instead of `passwd`. Due to impermanence (root wipe on reboot), regular `passwd` changes don't survive reboots.
 
 ### What Disko Creates
 
@@ -250,9 +254,10 @@ passwd yourname
 
 ### First Boot — What to Expect
 
-1. **GRUB** → **LUKS password** → **Login screen** (ReGreet) → **Niri desktop**
-2. Press `Mod+Return` to open a terminal
-3. Windows tile in scrollable columns — navigate with `Mod+Left/Right`
+1. **EFI stub** → **LUKS password** → **Login screen** → **Niri desktop**
+2. Log in with your username and initial password `nixos` — change it with `change-password`
+3. Press `Mod+Return` to open a terminal
+4. Windows tile in scrollable columns — navigate with `Mod+Left/Right`
 
 ### How Niri's Scrolling Tiling Works
 

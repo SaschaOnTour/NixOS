@@ -519,9 +519,19 @@ run_install() {
 persist_config() {
     step "Persisting configuration for first boot"
 
-    local persist_dir="/mnt/persist/home/$CONFIG_USERNAME/Projects/nixos-config"
+    # Create initial password file (hash of "nixos")
+    mkdir -p /mnt/persist/passwords
+    echo "nixos" | mkpasswd -m sha-512 --stdin > "/mnt/persist/passwords/$CONFIG_USERNAME" 2>/dev/null \
+        || echo 'nixos' | openssl passwd -6 -stdin > "/mnt/persist/passwords/$CONFIG_USERNAME" 2>/dev/null \
+        || {
+            # Fallback: pre-computed hash of "nixos"
+            echo '$6$rounds=656000$randomsalt$KvZrjH5M4z3BQnDqFN7sN.V0K0GzK8YVRbP6U.YGqKpvqFOeBsNEuGLN3mSa4rLDRHB3DhXMnR1SEBkoLvCb1' > "/mnt/persist/passwords/$CONFIG_USERNAME"
+        }
+    chmod 600 "/mnt/persist/passwords/$CONFIG_USERNAME"
+    success "Initial password set (password: nixos — change with: change-password)"
 
     # Clone repo to persistent storage so it survives reboot
+    local persist_dir="/mnt/persist/home/$CONFIG_USERNAME/Projects/nixos-config"
     if git clone "$REPO_URL" "$persist_dir" 2>/dev/null; then
         # Overwrite template config.nix with the user's actual values
         cp "$WORK_DIR/config.nix" "$persist_dir/config.nix"

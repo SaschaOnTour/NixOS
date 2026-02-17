@@ -11,10 +11,14 @@
     description = userConfig.username;
     extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
     shell = pkgs.fish;
-    # Initial password for first boot — change with: passwd
-    # /etc/shadow is persisted, so passwd changes survive reboots
-    initialPassword = "nixos";
+    # Password file in /persist survives root-wipe reboots
+    # Initial file created by install.sh with password "nixos"
+    # Change password with: passwd (updates /persist/passwords/<username>)
+    hashedPasswordFile = "/persist/passwords/${userConfig.username}";
   };
+
+  # Ensure passwd writes to the persistent location
+  users.mutableUsers = true;
 
   # Home Manager configuration
   home-manager = {
