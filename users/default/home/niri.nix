@@ -10,11 +10,12 @@
       environment = {
         NIXOS_OZONE_WL = "1";                    # Electron/Chromium → Wayland
         _JAVA_AWT_WM_NONREPARENTING = "1";       # JetBrains IDEs
-        QT_QPA_PLATFORM = "wayland";             # Qt apps
+        QT_QPA_PLATFORM = "wayland;xcb";         # Qt apps → Wayland first, X11 fallback
         SDL_VIDEODRIVER = "wayland";             # SDL apps
         CLUTTER_BACKEND = "wayland";             # Clutter apps
         GDK_BACKEND = "wayland,x11";             # GTK apps
         XDG_SESSION_TYPE = "wayland";
+        DISPLAY = ":0";                          # XWayland display for legacy apps
       };
 
       # Keyboard layout
@@ -25,6 +26,7 @@
 
       # Autostart applications (use argv, not command)
       spawn-at-startup = [
+        { argv = [ "xwayland-satellite" ]; }  # XWayland for legacy X11 apps
         { argv = [ "waybar" ]; }
         { argv = [ "mako" ]; }
         { argv = [ "swww-daemon" ]; }

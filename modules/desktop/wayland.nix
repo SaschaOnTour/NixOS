@@ -3,6 +3,10 @@
 
 {
   environment.systemPackages = with pkgs; [
+    # Qt Wayland support (needed for VLC, Qt apps on Wayland)
+    kdePackages.qtwayland
+    qt5.qtwayland
+
     # Status bar
     waybar
 

@@ -5,8 +5,11 @@
   # Install niri from the flake overlay
   nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
-  # Install niri and session files
-  environment.systemPackages = [ pkgs.niri ];
+  # Install niri and XWayland compatibility layer
+  environment.systemPackages = [
+    pkgs.niri
+    pkgs.xwayland-satellite  # XWayland for legacy X11 apps in Niri
+  ];
 
   # XWayland for legacy X11 apps
   programs.xwayland.enable = true;
