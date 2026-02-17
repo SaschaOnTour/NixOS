@@ -116,6 +116,12 @@
         "Mod+Shift+4".action.move-column-to-workspace = 4;
         "Mod+Shift+5".action.move-column-to-workspace = 5;
 
+        # Workspace navigation (sequential)
+        "Mod+Z".action.focus-workspace-up = {};
+        "Mod+H".action.focus-workspace-down = {};
+        "Mod+Shift+Z".action.move-column-to-workspace-up = {};
+        "Mod+Shift+H".action.move-column-to-workspace-down = {};
+
         # Layout
         "Mod+F".action.maximize-column = {};
         "Mod+Shift+F".action.fullscreen-window = {};
