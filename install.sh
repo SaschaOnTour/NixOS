@@ -516,6 +516,25 @@ run_install() {
 # Finish
 # ============================================================================
 
+persist_config() {
+    step "Persisting configuration for first boot"
+
+    local persist_dir="/mnt/persist/home/$CONFIG_USERNAME/Projects/nixos-config"
+
+    # Clone repo to persistent storage so it survives reboot
+    if git clone "$REPO_URL" "$persist_dir" 2>/dev/null; then
+        # Overwrite template config.nix with the user's actual values
+        cp "$WORK_DIR/config.nix" "$persist_dir/config.nix"
+        # Fix ownership (will be applied after user is created)
+        chown -R 1000:100 "/mnt/persist/home/$CONFIG_USERNAME/Projects"
+        success "Config persisted to ~/Projects/nixos-config"
+    else
+        warn "Could not persist config (non-critical)."
+        info "After reboot, clone manually:"
+        echo -e "  ${CYAN}cd ~/Projects && git clone $REPO_URL nixos-config${NC}"
+    fi
+}
+
 finish() {
     echo ""
     echo -e "${GREEN}"
@@ -526,12 +545,12 @@ finish() {
     echo -e "  ${BOLD}Next steps after reboot:${NC}"
     echo ""
     echo -e "  1. Enter your LUKS password at the boot prompt"
-    echo -e "  2. Log in as root (no password) and set your password:"
-    echo ""
-    echo -e "     ${CYAN}passwd $CONFIG_USERNAME${NC}"
-    echo ""
-    echo -e "  3. Log out and log in as ${BOLD}$CONFIG_USERNAME${NC}"
+    echo -e "  2. Log in as ${BOLD}$CONFIG_USERNAME${NC} (initial password: ${CYAN}nixos${NC})"
+    echo -e "  3. Change your password: ${CYAN}passwd${NC}"
     echo -e "  4. Press ${BOLD}Mod+Return${NC} to open a terminal"
+    echo ""
+    echo -e "  Your config is ready at ${CYAN}~/Projects/nixos-config${NC}"
+    echo -e "  Apply changes with: ${CYAN}os-switch${NC}"
     echo ""
 
     if ask_yes_no "Reboot now?" "y"; then
@@ -567,6 +586,7 @@ main() {
             success "Loaded: hostname=$CONFIG_HOSTNAME, disk=$SELECTED_DISK, user=$CONFIG_USERNAME"
             run_disko
             run_install
+            persist_config
             finish
             return
         else
@@ -581,6 +601,7 @@ main() {
     write_config
     run_disko
     run_install
+    persist_config
     finish
 }
 
