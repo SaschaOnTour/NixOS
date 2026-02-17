@@ -6,6 +6,17 @@
     enable = true;
 
     settings = {
+      # Environment variables for all apps launched from Niri
+      environment = {
+        NIXOS_OZONE_WL = "1";                    # Electron/Chromium → Wayland
+        _JAVA_AWT_WM_NONREPARENTING = "1";       # JetBrains IDEs
+        QT_QPA_PLATFORM = "wayland";             # Qt apps
+        SDL_VIDEODRIVER = "wayland";             # SDL apps
+        CLUTTER_BACKEND = "wayland";             # Clutter apps
+        GDK_BACKEND = "wayland,x11";             # GTK apps
+        XDG_SESSION_TYPE = "wayland";
+      };
+
       # Keyboard layout
       input.keyboard.xkb.layout = userConfig.keyboardLayout;
 
