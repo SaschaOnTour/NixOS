@@ -47,6 +47,28 @@
 
   ];
 
+  # Wayland environment variables
+  environment.sessionVariables = {
+    # Electron/Chromium apps (Chrome, Vivaldi, VS Code) → use Wayland
+    NIXOS_OZONE_WL = "1";
+    # JetBrains IDEs → fix blank windows on tiling WMs
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+    # Qt apps → use Wayland
+    QT_QPA_PLATFORM = "wayland";
+    # SDL apps → use Wayland
+    SDL_VIDEODRIVER = "wayland";
+    # Clutter apps → use Wayland
+    CLUTTER_BACKEND = "wayland";
+    # GDK apps → prefer Wayland
+    GDK_BACKEND = "wayland,x11";
+  };
+
+  # XDG portal for screen sharing, file dialogs etc.
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
   # LocalSend (AirDrop-Alternative, opens firewall port automatically)
   programs.localsend.enable = true;
 

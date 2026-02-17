@@ -57,6 +57,9 @@
 
       # Keybindings
       binds = {
+        # Hotkey overlay
+        "Mod+Shift+Slash".action.show-hotkey-overlay = {};
+
         # Applications
         "Mod+Return".action.spawn = style.terminal;
         "Mod+Space".action.spawn = "fuzzel";

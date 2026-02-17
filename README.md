@@ -110,15 +110,42 @@ passwd yourname
 
 > 📖 **New to NixOS?** There's a detailed [Beginner's Guide](#-beginners-guide) below covering every step from flashing the USB to your first desktop session.
 
-## 🔄 Updates
+## 🔄 After Installation: Setup & Updates
+
+### First thing after install: Clone your config
+
+The installer uses `/tmp` which doesn't survive reboots. Clone your config to a persistent location:
+
+```bash
+cd ~/Projects
+git clone https://github.com/SaschaOnTour/NixOS.git nixos-config
+cd nixos-config
+```
+
+### Applying config changes
+
+After editing your config or pulling updates:
+
+```bash
+cd ~/Projects/nixos-config
+os-switch              # Apply changes (alias for: sudo nixos-rebuild switch --flake .#hostname)
+```
+
+No reboot needed — changes are applied immediately (except kernel updates).
+
+### Updating all packages
 
 ```bash
 os-update              # Update flake inputs + rebuild
 # or manually:
-sudo nixos-rebuild switch --flake .#hostname --update-input nixpkgs
+cd ~/Projects/nixos-config
+nix flake update
+os-switch
 ```
 
-Rollback a broken change instantly:
+### Rollback
+
+If something breaks:
 
 ```bash
 sudo nixos-rebuild switch --rollback

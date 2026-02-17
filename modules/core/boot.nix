@@ -10,11 +10,17 @@
   # Hardened Kernel
   boot.kernelPackages = pkgs.linuxPackages_hardened;
 
+  # Faster boot: compress initrd with zstd (smaller = faster load)
+  boot.initrd.compressor = "zstd";
+  boot.initrd.compressorArgs = [ "-19" ];
+
   # Hibernation: Resume from encrypted swap
+  # LUKS unlock is handled by Disko automatically
   boot.resumeDevice = "/dev/pool/swap";
 
   # IMPERMANENCE: Root-Wipe Script
   # Deletes and recreates the root Btrfs subvolume on every boot
+  # Note: On hibernate resume, the kernel restores RAM state before this runs
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     mkdir -p /btrfs_tmp
     mount /dev/pool/root /btrfs_tmp || { echo "ERROR: Mount failed"; exit 1; }

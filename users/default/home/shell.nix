@@ -21,7 +21,7 @@
       os-update = "nh os switch --update";
 
       # Rust shortcuts
-      test = "cargo nextest run";
+      ctest = "cargo nextest run";
       cov = "cargo llvm-cov";
     };
 

@@ -35,13 +35,13 @@ in
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
         user = "greeter";
       };
     };
   };
 
-  environment.systemPackages = lib.mkIf (!useReGreet) [ pkgs.greetd.tuigreet ];
+  environment.systemPackages = lib.mkIf (!useReGreet) [ pkgs.tuigreet ];
 
   # Ensure greeter can start Niri
   environment.etc."greetd/environments".text = ''
