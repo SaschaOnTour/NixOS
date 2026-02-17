@@ -477,7 +477,7 @@ run_install() {
     step "Installing NixOS"
 
     # Extra binary caches (avoids compiling niri from source) + connection tuning
-    export NIX_CONFIG=$'http-connections = 25\nconnect-timeout = 15\nextra-substituters = https://niri.cachix.org\nextra-trusted-public-keys = niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Zaq/2EOoUmBD6PDOMQ='
+    export NIX_CONFIG=$'http-connections = 25\nconnect-timeout = 15\nextra-substituters = https://niri.cachix.org\nextra-trusted-public-keys = niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964='
 
     # Warm up DNS and network connections
     info "Warming up network connections..."
