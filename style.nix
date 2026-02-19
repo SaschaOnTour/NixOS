@@ -20,7 +20,7 @@
   };
 
   # Default applications
-  browser = "zen";
+  browser = "zen-beta";
   terminal = "ghostty";
   editor = "zed";
 

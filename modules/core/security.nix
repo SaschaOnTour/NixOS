@@ -47,7 +47,8 @@
         # Browser profiles
         ".mozilla"
         ".zen"
-        ".config/helium"
+        ".config/zen"
+        ".config/net.imput.helium"
 
         # Application configs
         ".thunderbird"
