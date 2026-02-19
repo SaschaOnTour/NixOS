@@ -122,6 +122,10 @@
         "Mod+H".action.focus-workspace-down = {};
         "Mod+Shift+Z".action.move-column-to-workspace-up = {};
         "Mod+Shift+H".action.move-column-to-workspace-down = {};
+        "Mod+Page_Up".action.focus-workspace-up = {};
+        "Mod+Page_Down".action.focus-workspace-down = {};
+        "Mod+Shift+Page_Up".action.move-column-to-workspace-up = {};
+        "Mod+Shift+Page_Down".action.move-column-to-workspace-down = {};
 
         # Layout
         "Mod+F".action.maximize-column = {};
