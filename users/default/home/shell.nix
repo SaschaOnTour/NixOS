@@ -23,6 +23,9 @@
       # Rust shortcuts
       ctest = "cargo nextest run";
       cov = "cargo llvm-cov";
+
+      # Midnight Commander
+      mcdiff = "mcdiff -u";
     };
 
     interactiveShellInit = ''
@@ -48,6 +51,17 @@
     enable = true;
     enableFishIntegration = true;
   };
+
+  # Session environment variables
+  home.sessionVariables = {
+    KEYBOARD_KEY_TIMEOUT_US = "50000";
+  };
+
+  # Midnight Commander skin
+  xdg.configFile."mc/ini".text = ''
+    [Midnight-Commander]
+    skin=dark
+  '';
 
   # Git configuration from config.nix
   programs.git = {

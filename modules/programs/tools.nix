@@ -23,7 +23,11 @@
     zathura      # PDF viewer
     mpv          # Video player
 
+    # === File Manager (dual-pane) ===
+    mc           # Midnight Commander
+
     # === CLI Utilities ===
+    micro        # Terminal editor
     nano         # Emergency editor
     dust         # Disk usage analyzer
     fd           # Find replacement

@@ -78,6 +78,7 @@
         "Mod+Space".action.spawn = "fuzzel";
         "Mod+B".action.spawn = style.browser;
         "Mod+E".action.spawn = style.editor;
+        "Mod+T".action.spawn = "thunderbird";
         "Mod+P".action.spawn = "niri-powermenu";
 
         # Window management

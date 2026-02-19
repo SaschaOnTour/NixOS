@@ -30,9 +30,19 @@
       url = "github:DreamMaoMao/mangowc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    helium = {
+      url = "github:amaanq/helium-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, disko, impermanence, home-manager, rust-overlay, niri, mangowc, ... }@inputs:
+  outputs = { self, nixpkgs, disko, impermanence, home-manager, rust-overlay, niri, mangowc, zen-browser, helium, ... }@inputs:
   let
     userConfig = import ./config.nix;
     style = import ./style.nix;

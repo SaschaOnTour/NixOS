@@ -20,7 +20,7 @@
   };
 
   # Default applications
-  browser = "vivaldi";
+  browser = "zen";
   terminal = "ghostty";
   editor = "zed";
 

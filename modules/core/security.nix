@@ -46,8 +46,8 @@
         ".ssh"
         # Browser profiles
         ".mozilla"
-        ".config/vivaldi"
-        ".config/google-chrome"
+        ".zen"
+        ".config/helium"
 
         # Application configs
         ".thunderbird"
