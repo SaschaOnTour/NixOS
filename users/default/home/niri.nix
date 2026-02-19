@@ -196,9 +196,10 @@
       color = builtins.substring 1 6 style.colors.background;
       font = style.fonts.default;
       font-size = 24;
+      indicator-idle-visible = true;
       indicator-radius = 100;
       indicator-thickness = 10;
-      inside-color = "00000000";
+      inside-color = "1a1b2680";
       inside-clear-color = "00000000";
       inside-ver-color = "00000000";
       inside-wrong-color = "00000000";

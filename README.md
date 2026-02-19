@@ -196,7 +196,7 @@ Niri is a **scrolling tiling** compositor — windows are arranged in columns th
 
 **CLI:** `eza`, `bat`, `fd`, `ripgrep`, `jq`, `yazi`, `btop`, `dust`, `zoxide`, `tldr`, `lazygit`, `lazydocker`, `gh`, `mc`, `micro`
 **Browsers:** Zen Browser, Helium, Tor Browser
-**Desktop:** VLC, OBS Studio, mpv, imv, zathura, KeePassXC, LocalSend, FSearch
+**Desktop:** VLC, OBS Studio, mpv, imv, zathura, KeePassXC, LocalSend, FSearch, Ferdium, Thunderbird, Syncthing
 **Dev:** JetBrains Rider/IntelliJ/RustRover, Zed, Docker, Rust, .NET, Java, Node.js
 **AI:** Claude Code, ChatGPT Codex, OpenCode
 **Shell:** Fish with pre-configured aliases, starship prompt, zoxide directory jumping

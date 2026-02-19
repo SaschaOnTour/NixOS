@@ -59,6 +59,9 @@
         ".config/obs-studio"
         ".config/vlc"
         ".config/localsend"
+        ".config/Ferdium"
+        ".config/syncthing"
+        ".local/state/syncthing"
 
         # AI tools
         ".claude"

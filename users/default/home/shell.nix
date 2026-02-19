@@ -26,6 +26,9 @@
 
       # Midnight Commander
       mcdiff = "mcdiff -u";
+
+      # Syncthing
+      syncthing-ui = "zen http://localhost:8384";
     };
 
     interactiveShellInit = ''

@@ -16,4 +16,13 @@
 
   # Enable Home Manager
   programs.home-manager.enable = true;
+
+  # Desktop entries for Fuzzel
+  xdg.desktopEntries.syncthing = {
+    name = "Syncthing";
+    comment = "File synchronization web UI";
+    exec = "${style.browser} http://localhost:8384";
+    icon = "syncthing";
+    categories = [ "Network" "FileTransfer" ];
+  };
 }

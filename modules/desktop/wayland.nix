@@ -52,6 +52,9 @@
     # Email
     thunderbird
 
+    # Messaging (all-in-one)
+    ferdium
+
   ];
 
   # Wayland environment variables

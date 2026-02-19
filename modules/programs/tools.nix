@@ -1,5 +1,5 @@
 # Tools: Monitoring, files, media, CLI utilities
-{ pkgs, ... }:
+{ pkgs, userConfig, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -60,6 +60,14 @@
     # === System ===
     nh           # Nix helper
   ];
+
+  # Syncthing (continuous file sync)
+  services.syncthing = {
+    enable = true;
+    user = userConfig.username;
+    dataDir = "/home/${userConfig.username}";
+    openDefaultPorts = true;
+  };
 
   # Fast file search with plocate
   services.locate = {
