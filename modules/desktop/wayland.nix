@@ -56,7 +56,7 @@
 
   # Wayland environment variables
   environment.sessionVariables = {
-    # Electron/Chromium apps (Chrome, Vivaldi, VS Code) → use Wayland
+    # Electron/Chromium apps (Helium, VS Code, etc.) → use Wayland
     NIXOS_OZONE_WL = "1";
     # JetBrains IDEs → fix blank windows on tiling WMs
     _JAVA_AWT_WM_NONREPARENTING = "1";

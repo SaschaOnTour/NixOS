@@ -39,4 +39,10 @@
     enable = true;
     platformTheme.name = "gtk";
   };
+
+  # Dark mode preference (freedesktop standard, read by GTK4, Electron, browsers)
+  dconf.settings."org/gnome/desktop/interface" = {
+    color-scheme = "prefer-dark";
+    gtk-theme = style.gtkTheme;
+  };
 }
