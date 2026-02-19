@@ -48,11 +48,13 @@
     style = import ./style.nix;
   in {
     nixosConfigurations.${userConfig.hostname} = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
       specialArgs = {
         inherit inputs style userConfig;
       };
       modules = [
+        # Set platform (replaces deprecated top-level 'system' attribute)
+        { nixpkgs.hostPlatform = "x86_64-linux"; }
+
         # Flake modules
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
