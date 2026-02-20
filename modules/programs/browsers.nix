@@ -47,6 +47,8 @@ in
           installation_mode = "force_installed";
         };
       };
+      PasswordManagerEnabled = false;
+      OfferToSaveLogins = false;
       DisableTelemetry = true;
       DNSOverHTTPS = {
         Enabled = false;
